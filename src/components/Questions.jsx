@@ -10,9 +10,7 @@ const Container = tw.div`relative w-full h-full max-w-3xl flex flex-col items-ce
 
 const QuestionCount = tw.div`w-full min-h-[60px] bg-gray-400 rounded-t-3xl pl-10 pt-2 text-2xl font-bold
 `;
-const shuffeledQuestions = questions
-	.sort(() => Math.random() - 0.5)
-	.slice(0, 2);
+const shuffeledQuestions = questions.sort(() => Math.random() - 0.5);
 
 const Questions = () => {
 	const [count, setCount] = useState(0);
