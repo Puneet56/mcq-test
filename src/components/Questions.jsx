@@ -9,25 +9,25 @@ const Container = tw.div`relative w-full h-full max-w-3xl flex flex-col items-ce
 
 const QuestionCount = tw.div`w-full min-h-[60px] bg-gray-400 rounded-t-3xl pl-10 pt-2 text-2xl font-bold
 `;
+const shuffeledQuestions = questions.sort(() => Math.random() - 0.5);
 
 const Questions = () => {
 	const [count, setCount] = useState(0);
 	const [correctCount, setCorrectCount] = useState(0);
-	const currentQuestion = questions[count];
+	const currentQuestion = shuffeledQuestions[count];
 
 	const handleNext = () => {
-		if (count < questions.length - 1) {
+		if (count < shuffeledQuestions.length - 1) {
 			console.log('Happened');
 			setCount(count + 1);
 		}
 	};
-
 	return (
 		<>
-			<ProgressBar total={questions.length} progress={count + 1} />
+			<ProgressBar total={shuffeledQuestions.length} progress={count + 1} />
 			<Container>
 				<QuestionCount>
-					Question {count + 1} of {questions.length} :-
+					Question {count + 1} of {shuffeledQuestions.length} :-
 				</QuestionCount>
 				{<QuestionItem item={currentQuestion} next={handleNext} />}
 			</Container>

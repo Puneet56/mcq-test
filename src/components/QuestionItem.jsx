@@ -66,7 +66,7 @@ const QuestionItem = ({ item, next }) => {
 					</Option>
 				))}
 			</OptionsContainer>
-			<QuestionText className='text-center'>{alert}</QuestionText>
+			{answered && <QuestionText className='text-center'>{alert}</QuestionText>}
 			{answered && <Next onClick={handleNext}>Next</Next>}
 		</Container>
 	);
