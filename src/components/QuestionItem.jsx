@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import tw from 'tailwind-styled-components';
 
-const Container = tw.h1`w-full flex-grow bg-gray-400 flex flex-col items-center justify-start rounded-b-3xl shadow-xl
+const Container = tw.h1`w-full flex-grow bg-gray-400 flex flex-col items-center justify-start
 `;
 const QuestionText = tw.p`text-2xl px-10 w-full
 `;
@@ -14,7 +14,7 @@ const Option = tw.button` w-[30%] border-2 border-gray-900 bg-gray-700 text-whit
 const Next = tw.button`w-[40%] absolute bottom-10 border-2 border-gray-900 bg-gray-700 text-white text-xl rounded-xl px-8 py-4 m-10
 `;
 
-const QuestionItem = ({ item, next }) => {
+const QuestionItem = ({ item, next, correct, last }) => {
 	const [selected, setSelected] = useState(false);
 	const [answered, setAnswered] = useState(false);
 	const [alert, setAlert] = useState('');
@@ -32,8 +32,10 @@ const QuestionItem = ({ item, next }) => {
 		setSelected(value);
 		if (value === item.correct_answer) {
 			setAlert('Correct!');
+			correct(true);
 		} else {
 			setAlert('Incorrect!');
+			correct(false);
 		}
 		setAnswered(true);
 	};
@@ -67,7 +69,7 @@ const QuestionItem = ({ item, next }) => {
 				))}
 			</OptionsContainer>
 			{answered && <QuestionText className='text-center'>{alert}</QuestionText>}
-			{answered && <Next onClick={handleNext}>Next</Next>}
+			{!last && answered && <Next onClick={handleNext}>Next</Next>}
 		</Container>
 	);
 };
